@@ -78,4 +78,15 @@ describe('domify(html)', function(){
 
     assert(thrown && /more than one element/i.test(thrown.message));
   })
+
+  it('should throw if no tag is given', function(){
+    var thrown = null;
+    try {
+      domify('  ');
+    } catch (err) {
+      thrown = err;
+    }
+
+    assert(thrown && /no elements/i.test(thrown.message));
+  })
 })
