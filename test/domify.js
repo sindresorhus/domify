@@ -67,4 +67,26 @@ describe('domify(html)', function(){
     var el = domify('<optgroup></optgroup>');
     assert('OPTGROUP' == el.nodeName);
   })
+
+  it('should throw if more than one tag is given', function(){
+    var thrown = null;
+    try {
+      domify('<div></div><span></span>');
+    } catch (err) {
+      thrown = err;
+    }
+
+    assert(thrown && /more than one element/i.test(thrown.message));
+  })
+
+  it('should throw if no tag is given', function(){
+    var thrown = null;
+    try {
+      domify('  ');
+    } catch (err) {
+      thrown = err;
+    }
+
+    assert(thrown && /no elements/i.test(thrown.message));
+  })
 })
