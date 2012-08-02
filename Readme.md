@@ -16,7 +16,12 @@ $ make
 $ open test/index.html
 ```
 
-## License 
+You'll need the `component` tool for the `make` step; get it by running
+```
+$ npm install -g cloud
+```
+
+## License
 
 (The MIT License)
 
