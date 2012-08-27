@@ -79,6 +79,11 @@ describe('domify(html)', function(){
     assert(thrown && /more than one element/i.test(thrown.message));
   })
 
+  it('should ignore newlines', function(){
+    var el = domify('<div>\n</div>');
+    assert('DIV' == el.nodeName);
+  })
+
   it('should throw if no tag is given', function(){
     var thrown = null;
     try {
