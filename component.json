@@ -1,6 +1,6 @@
 {
   "name": "domify",
-  "version": "0.0.2",
+  "version": "0.0.21",
   "description": "turn HTML into DOM elements",
   "keywords": ["dom", "html", "client", "browser", "component"],
   "scripts": ["index.js"]

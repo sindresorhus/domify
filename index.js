@@ -28,6 +28,9 @@ var map = {
 module.exports = function(html){
   if ('string' != typeof html) throw new TypeError('String expected');
 
+  // Remove newlines
+  var html = html.replace(/\n/g, '');
+
   // tag name
   var m = /<([\w:]+)/.exec(html);
   if (!m) throw new Error('No elements were generated.');
