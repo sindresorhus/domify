@@ -7,7 +7,7 @@
   , "dependencies": {}
   , "component": {
     "scripts": {
-      "domify": "lib/domify.js"
+      "domify": "index.js"
     }
   }
   , "main": "index"
