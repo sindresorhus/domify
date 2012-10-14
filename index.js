@@ -35,9 +35,9 @@ module.exports = function(html){
 
   // body support
   if (tag == 'body') {
-    var el = document.createElement('body');
-    el.innerHTML = stripBody(html);
-    return el;
+    var el = document.createElement('html');
+    el.innerHTML = html;
+    return el.removeChild(el.lastChild);
   }
 
   // wrap map
@@ -55,15 +55,3 @@ module.exports = function(html){
 
   return el.lastChild;
 };
-
-/**
- * Strip body tags from `html`.
- *
- * @param {String} html
- * @return {String}
- * @api private
- */
-
-function stripBody(html) {
-  return html.replace(/^\s*<body[^>]*>/, '').replace(/<\/body>\s*$/, '');
-}

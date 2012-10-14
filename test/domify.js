@@ -8,6 +8,17 @@ describe('domify(html)', function(){
     assert('Hello' == el.textContent);
   })
 
+  it('should support body tags', function(){
+    var el = domify('<body></body>');
+    assert('BODY' == el.nodeName);
+  })
+
+  it('should support body tags with classes', function(){
+    var el = domify('<body class="page"></body>');
+    assert('BODY' == el.nodeName);
+    assert('page' == el.className);
+  })
+
   it('should support legend tags', function(){
     var el = domify('<legend>Hello</legend>');
     assert('LEGEND' == el.nodeName);
