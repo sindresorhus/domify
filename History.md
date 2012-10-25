@@ -1,4 +1,12 @@
 
+0.1.0 / 2012-10-24 
+==================
+
+  * add support for body elements with classes [timoxley]
+  * add removal of dummy parent div [timoxley]
+  * fix tests
+  * fix Makefile
+
 0.0.3 / 2012-08-28 
 ==================
 
