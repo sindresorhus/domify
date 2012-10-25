@@ -100,4 +100,9 @@ describe('domify(html)', function(){
 
     assert(thrown && /no elements/i.test(thrown.message));
   })
+  it('should not set parentElement', function() {
+    var el = domify('<p>Hello</p>');
+    assert(!el.parentElement);
+    assert(!el.parentNode);
+  })
 })

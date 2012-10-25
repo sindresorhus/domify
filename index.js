@@ -53,5 +53,5 @@ module.exports = function(html){
     throw new Error('More than one element was generated.');
   }
 
-  return el.lastChild;
+  return el.removeChild(el.lastChild);
 };
