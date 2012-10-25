@@ -1,5 +1,5 @@
 
-build: tip.css index.js
+build: index.js
 	@component build
 
 components:
