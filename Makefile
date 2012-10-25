@@ -1,5 +1,11 @@
 
-build:
-	component build package.json test/build
+build: tip.css index.js
+	@component build
 
-.PHONY: build
+components:
+	@component install
+
+clean:
+	rm -fr build components
+
+.PHONY: clean
