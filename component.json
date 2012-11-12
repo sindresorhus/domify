@@ -2,9 +2,19 @@
   "name": "domify",
   "version": "0.1.0",
   "description": "turn HTML into DOM elements",
-  "keywords": ["dom", "html", "client", "browser", "component"],
   "scripts": ["index.js"],
   "development": {
     "visionmedia/mocha-cloud": "*"
-  }
+  },
+  "keywords": [
+    "dom",
+    "html",
+    "client",
+    "browser",
+    "component"
+  ],
+  "scripts": [
+    "index.js"
+  ],
+  "license": "MIT"
 }
