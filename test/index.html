@@ -16,7 +16,7 @@
     <script src="../build/build.js"></script>
     <script src="domify.js"></script>
     <script>
-      var cloud = require('visionmedia-mocha-cloud');
+      var cloud = require('visionmedia-mocha-cloud/client');
       if (window.mochaPhantomJS) mochaPhantomJS.run()
       else cloud(mocha.run());
     </script>
