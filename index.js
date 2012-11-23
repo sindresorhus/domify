@@ -27,6 +27,7 @@ var map = {
 
 module.exports = function(html){
   if ('string' != typeof html) throw new TypeError('String expected');
+  html = html.trim()
 
   // tag name
   var m = /<([\w:]+)/.exec(html);

@@ -19,6 +19,12 @@ describe('domify(html)', function(){
     assert('page' == el.className);
   })
 
+  it('should ignore trailing/leading whitespace', function(){
+    var el = domify(' <p>Hello</p> ');
+    assert('P' == el.nodeName);
+    assert('Hello' == el.textContent);
+  })
+
   it('should support legend tags', function(){
     var el = domify('<legend>Hello</legend>');
     assert('LEGEND' == el.nodeName);
