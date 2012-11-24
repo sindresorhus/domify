@@ -8,7 +8,6 @@ describe('domify(html)', function(){
     assert('Hello' == el.textContent);
 
     var els = domify('<p>one</p><p>two</p><p>three</p>');
-    console.log(els);
     assert('one' == els[0].textContent);
     assert('two' == els[1].textContent);
     assert('three' == els[2].textContent);
