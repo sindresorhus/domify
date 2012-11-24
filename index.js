@@ -1,5 +1,11 @@
 
 /**
+ * Expose `parse`.
+ */
+
+module.exports = parse;
+
+/**
  * Wrap map from jquery.
  */
 
@@ -20,26 +26,28 @@ var map = {
 };
 
 /**
- * Convert the given `html` into DOM elements.
+ * Parse `html` and return the children.
  *
- * @api public
+ * @param {String} html
+ * @return {Array}
+ * @api private
  */
 
-module.exports = function(html){
+function parse(html) {
   if ('string' != typeof html) throw new TypeError('String expected');
-
+  
   // tag name
   var m = /<([\w:]+)/.exec(html);
   if (!m) throw new Error('No elements were generated.');
   var tag = m[1];
-
+  
   // body support
   if (tag == 'body') {
     var el = document.createElement('html');
     el.innerHTML = html;
-    return el.removeChild(el.lastChild);
+    return [el.removeChild(el.lastChild)];
   }
-
+  
   // wrap map
   var wrap = map[tag] || map._default;
   var depth = wrap[0];
@@ -49,9 +57,23 @@ module.exports = function(html){
   el.innerHTML = prefix + html + suffix;
   while (depth--) el = el.lastChild;
 
-  if (el.lastChild.nextElementSibling || el.lastChild.previousElementSibling) {
-    throw new Error('More than one element was generated.');
+  return orphan(el.children);
+}
+
+/**
+ * Orphan `els` and return an array.
+ *
+ * @param {NodeList} els
+ * @return {Array}
+ * @api private
+ */
+
+function orphan(els) {
+  var ret = [];
+
+  while (els.length) {
+    ret.push(els[0].parentNode.removeChild(els[0]));
   }
 
-  return el.removeChild(el.lastChild);
-};
+  return ret;
+}
