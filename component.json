@@ -4,7 +4,8 @@
   "description": "turn HTML into DOM elements",
   "scripts": ["index.js"],
   "development": {
-    "visionmedia/mocha-cloud": "*"
+    "component/assert": "*",
+    "visionmedia/mocha": "*"
   },
   "keywords": [
     "dom",

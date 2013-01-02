@@ -2,23 +2,17 @@
   <head>
     <title>domify tests</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="mocha/mocha.css" />
-    <script src="mocha/mocha.js"></script>
-    <script>mocha.setup('bdd')</script>
-    <script>
-      function assert(expr, msg) {
-        if (!expr) throw new Error(msg || 'failed');
-      }
-    </script>
+    <link rel="stylesheet" href="../build/build.css" />
   </head>
   <body>
     <div id="mocha"></div>
     <script src="../build/build.js"></script>
-    <script src="domify.js"></script>
     <script>
-      var cloud = require('visionmedia-mocha-cloud/client');
-      if (window.mochaPhantomJS) mochaPhantomJS.run()
-      else cloud(mocha.run());
+      var assert = require('component-assert');
+      require('visionmedia-mocha');
+      mocha.setup('bdd');
     </script>
+    <script src="domify.js"></script>
+    <script>mocha.run();</script>
   </body>
 </html>
