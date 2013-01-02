@@ -11,11 +11,10 @@ domify('<p>Hello</p><p>World</p>')
 ## Running tests
 
 ```
-$ git submodule update --init
 $ make
 $ open test/index.html
 ```
 
-## License 
+## License
 
   MIT
