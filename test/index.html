@@ -13,6 +13,9 @@
       mocha.setup('bdd');
     </script>
     <script src="domify.js"></script>
-    <script>mocha.run();</script>
+    <script>
+      var cloud = require('visionmedia-mocha-cloud');
+      cloud(mocha.run());
+    </script>
   </body>
 </html>
