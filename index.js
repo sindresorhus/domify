@@ -45,7 +45,7 @@ function parse(html) {
   if (tag == 'body') {
     var el = document.createElement('html');
     el.innerHTML = html;
-    return [el.removeChild(el.lastChild)];
+    return el.removeChild(el.lastChild);
   }
   
   // wrap map
@@ -57,23 +57,15 @@ function parse(html) {
   el.innerHTML = prefix + html + suffix;
   while (depth--) el = el.lastChild;
 
-  return orphan(el.children);
-}
-
-/**
- * Orphan `els` and return an array.
- *
- * @param {NodeList} els
- * @return {Array}
- * @api private
- */
-
-function orphan(els) {
-  var ret = [];
-
-  while (els.length) {
-    ret.push(els[0].parentNode.removeChild(els[0]));
+  var els = el.children;
+  if (els.length === 1) {
+    return el.removeChild(els[0]);
   }
 
-  return ret;
+  var fragment = document.createDocumentFragment();
+  while (els.length) {
+    fragment.appendChild(el.removeChild(els[0]));
+  }
+
+  return fragment;
 }
