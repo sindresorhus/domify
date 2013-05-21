@@ -2,7 +2,9 @@
   "name": "domify",
   "version": "0.1.0",
   "description": "turn HTML into DOM elements",
-  "scripts": ["index.js"],
+  "scripts": [
+    "index.js"
+  ],
   "development": {
     "component/assert": "*",
     "visionmedia/mocha": "*",
@@ -15,8 +17,8 @@
     "browser",
     "component"
   ],
-  "scripts": [
-    "index.js"
-  ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "juliangruber/wrap-map": "*"
+  }
 }
