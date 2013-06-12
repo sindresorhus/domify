@@ -29,25 +29,31 @@ var map = {
  * Parse `html` and return the children.
  *
  * @param {String} html
+ * @param {Boolean} returnDocFrag
  * @return {Array}
  * @api private
  */
 
-function parse(html) {
+function parse(html, returnDocFrag) {
   if ('string' != typeof html) throw new TypeError('String expected');
-  
+
   // tag name
   var m = /<([\w:]+)/.exec(html);
   if (!m) throw new Error('No elements were generated.');
   var tag = m[1];
-  
+
   // body support
   if (tag == 'body') {
     var el = document.createElement('html');
     el.innerHTML = html;
+
+    if (returnDocFrag) {
+      throw new Error('Returning <body></body> in a document fragment is not supported.')
+    }
+
     return [el.removeChild(el.lastChild)];
   }
-  
+
   // wrap map
   var wrap = map[tag] || map._default;
   var depth = wrap[0];
@@ -57,7 +63,10 @@ function parse(html) {
   el.innerHTML = prefix + html + suffix;
   while (depth--) el = el.lastChild;
 
-  return orphan(el.children);
+  return (returnDocFrag
+    ? fragmentize
+    : orphan
+  )(el.children);
 }
 
 /**
@@ -77,3 +86,21 @@ function orphan(els) {
 
   return ret;
 }
+
+/**
+ * Orphan `els` and return a document fragment.
+ *
+ * @param {NodeList} els
+ * @return {DocumentFragment}
+ * @api private
+ */
+
+ function fragmentize(els) {
+  var frag = document.createDocumentFragment();
+
+  while (els.length) {
+    frag.appendChild(els[0].parentNode.removeChild(els[0]));
+  }
+
+  return frag;
+ }

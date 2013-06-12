@@ -90,3 +90,97 @@ describe('domify(html)', function(){
     assert(!el.parentNode);
   })
 })
+
+describe('domify(html, true)', function(){
+  it('should convert HTML to DOM elements', function(){
+    var el = domify('<p>Hello</p>', true).childNodes[0];
+    assert('P' == el.nodeName);
+    assert('Hello' == el.textContent);
+
+    var els = domify('<p>one</p><p>two</p><p>three</p>', true);
+    assert('one' == els.childNodes[0].textContent);
+    assert('two' == els.childNodes[1].textContent);
+    assert('three' == els.childNodes[2].textContent);
+  })
+
+  it('should not support body tags', function(){
+    try {
+      domify('<body></body>', true)
+      assert(false)
+    } catch (err) {
+      assert(true)
+    }
+  })
+
+  // it('should support body tags with classes', function(){
+  //   var el = domify('<body class="page"></body>', true).childNodes[0];
+  //   assert('BODY' == el.nodeName);
+  //   assert('page' == el.className);
+  // })
+
+  it('should support legend tags', function(){
+    var el = domify('<legend>Hello</legend>', true).childNodes[0];
+    assert('LEGEND' == el.nodeName);
+  })
+
+  it('should support table tags', function(){
+    var el = domify('<table></table>', true).childNodes[0];
+    assert('TABLE' == el.nodeName);
+  })
+
+  it('should support thead tags', function(){
+    var el = domify('<thead></thead>', true).childNodes[0];
+    assert('THEAD' == el.nodeName);
+  })
+
+  it('should support tbody tags', function(){
+    var el = domify('<tbody></tbody>', true).childNodes[0];
+    assert('TBODY' == el.nodeName);
+  })
+
+  it('should support tfoot tags', function(){
+    var el = domify('<tfoot></tfoot>', true).childNodes[0];
+    assert('TFOOT' == el.nodeName);
+  })
+
+  it('should support caption tags', function(){
+    var el = domify('<caption></caption>', true).childNodes[0];
+    assert('CAPTION' == el.nodeName);
+  })
+
+  it('should support col tags', function(){
+    var el = domify('<col></col>', true).childNodes[0];
+    assert('COL' == el.nodeName);
+  })
+
+  it('should support td tags', function(){
+    var el = domify('<td></td>', true).childNodes[0];
+    assert('TD' == el.nodeName);
+  })
+
+  it('should support th tags', function(){
+    var el = domify('<th></th>', true).childNodes[0];
+    assert('TH' == el.nodeName);
+  })
+
+  it('should support tr tags', function(){
+    var el = domify('<tr></tr>', true).childNodes[0];
+    assert('TR' == el.nodeName);
+  })
+
+  it('should support option tags', function(){
+    var el = domify('<option></option>', true).childNodes[0];
+    assert('OPTION' == el.nodeName);
+  })
+
+  it('should support optgroup tags', function(){
+    var el = domify('<optgroup></optgroup>', true).childNodes[0];
+    assert('OPTGROUP' == el.nodeName);
+  })
+
+  // it('should not set parentElement', function() {
+  //   var el = domify('<p>Hello</p>', true).childNodes[0];
+  //   assert(!el.parentElement);
+  //   assert(!el.parentNode);
+  // })
+})
