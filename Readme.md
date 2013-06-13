@@ -4,8 +4,7 @@
   Turn HTML into DOM elements x-browser.
 
 ```js
-domify('<p>Hello</p><p>World</p>')
-// => [<p>Hello</p><p>World</p>]
+domify('<p>Hello <em>there</em></p>')
 ```
 
 ## Running tests

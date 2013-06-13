@@ -1,4 +1,9 @@
 
+1.0.0 / 2013-06-13 
+==================
+
+ * return document fragments for multiple top level nodes
+
 0.2.0 / 2013-05-21 
 ==================
 

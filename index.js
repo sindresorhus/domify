@@ -35,19 +35,19 @@ var map = {
 
 function parse(html) {
   if ('string' != typeof html) throw new TypeError('String expected');
-  
+
   // tag name
   var m = /<([\w:]+)/.exec(html);
   if (!m) throw new Error('No elements were generated.');
   var tag = m[1];
-  
+
   // body support
   if (tag == 'body') {
     var el = document.createElement('html');
     el.innerHTML = html;
     return el.removeChild(el.lastChild);
   }
-  
+
   // wrap map
   var wrap = map[tag] || map._default;
   var depth = wrap[0];
@@ -58,7 +58,7 @@ function parse(html) {
   while (depth--) el = el.lastChild;
 
   var els = el.children;
-  if (els.length === 1) {
+  if (1 == els.length) {
     return el.removeChild(els[0]);
   }
 
