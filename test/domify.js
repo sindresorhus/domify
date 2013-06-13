@@ -1,6 +1,6 @@
 
 var assert = require('assert');
-var domify = require('../');
+var domify = require('domify');
 
 describe('domify(html)', function(){
   it('should convert HTML to DOM elements', function(){
