@@ -1,14 +1,24 @@
 {
-    "name": "domify"
-  , "version": "1.0.0"
-  , "description": "turn HTML into DOM elements"
-  , "keywords": ["dom", "html", "client", "browser", "component"]
-  , "author": "TJ Holowaychuk <tj@vision-media.ca>"
-  , "dependencies": {}
-  , "component": {
-    "scripts": {
-      "domify": "index.js"
+    "name": "domify",
+    "version": "1.0.0",
+    "description": "turn HTML into DOM elements",
+    "keywords": [
+        "dom",
+        "html",
+        "client",
+        "browser",
+        "component"
+    ],
+    "author": "TJ Holowaychuk <tj@vision-media.ca>",
+    "dependencies": {},
+    "component": {
+        "scripts": {
+            "domify": "index.js"
+        }
+    },
+    "main": "index",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/component/domify.git"
     }
-  }
-  , "main": "index"
 }
