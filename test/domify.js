@@ -12,6 +12,12 @@ describe('domify(html)', function(){
     assert('onetwothree' == els.textContent);
   })
 
+  it('should ignore trailing/leading whitespace', function(){
+    var el = domify(' <p>Hello</p> ');
+    assert('P' == el.nodeName);
+    assert('Hello' == el.textContent);
+  })
+
   it('should support body tags', function(){
     var el = domify('<body></body>');
     assert('BODY' == el.nodeName);

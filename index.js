@@ -36,6 +36,8 @@ var map = {
 function parse(html) {
   if ('string' != typeof html) throw new TypeError('String expected');
 
+  html = html.replace(/^\s+|\s+$/g, ''); // Remove leading/trailing whitespace
+
   // tag name
   var m = /<([\w:]+)/.exec(html);
   if (!m) throw new Error('No elements were generated.');
