@@ -26,13 +26,11 @@ function require(path, parent, orig) {
   // perform real require()
   // by invoking the module's
   // registered function
-  if (!module._resolving && !module.exports) {
+  if (!module.exports) {
     var mod = {};
     mod.exports = {};
     mod.client = mod.component = true;
-    module._resolving = true;
     module.call(this, mod.exports, require.relative(resolved), mod);
-    delete module._resolving;
     module.exports = mod.exports;
   }
 
@@ -1723,6 +1721,7 @@ function Mocha(options) {\n\
   this.bail(options.bail);\n\
   this.reporter(options.reporter);\n\
   if (null != options.timeout) this.timeout(options.timeout);\n\
+  this.useColors(options.useColors)\n\
   if (options.slow) this.slow(options.slow);\n\
 }\n\
 \n\
@@ -1763,12 +1762,15 @@ Mocha.prototype.reporter = function(reporter){\n\
     this._reporter = reporter;\n\
   } else {\n\
     reporter = reporter || 'dot';\n\
-    try {\n\
-      this._reporter = require('./reporters/' + reporter);\n\
-    } catch (err) {\n\
-      this._reporter = require(reporter);\n\
-    }\n\
-    if (!this._reporter) throw new Error('invalid reporter \"' + reporter + '\"');\n\
+    var _reporter;\n\
+    try { _reporter = require('./reporters/' + reporter); } catch (err) {};\n\
+    if (!_reporter) try { _reporter = require(reporter); } catch (err) {};\n\
+    if (!_reporter && reporter === 'teamcity')\n\
+      console.warn('The Teamcity reporter was moved to a package named ' +\n\
+        'mocha-teamcity-reporter ' +\n\
+        '(https://npmjs.org/package/mocha-teamcity-reporter).');\n\
+    if (!_reporter) throw new Error('invalid reporter \"' + reporter + '\"');\n\
+    this._reporter = _reporter;\n\
   }\n\
   return this;\n\
 };\n\
@@ -1783,6 +1785,7 @@ Mocha.prototype.reporter = function(reporter){\n\
 Mocha.prototype.ui = function(name){\n\
   name = name || 'bdd';\n\
   this._ui = exports.interfaces[name];\n\
+  if (!this._ui) try { this._ui = require(name); } catch (err) {};\n\
   if (!this._ui) throw new Error('invalid interface \"' + name + '\"');\n\
   this._ui = this._ui(this.suite);\n\
   return this;\n\
@@ -1909,6 +1912,21 @@ Mocha.prototype.globals = function(globals){\n\
 };\n\
 \n\
 /**\n\
+ * Emit color output.\n\
+ *\n\
+ * @param {Boolean} colors\n\
+ * @return {Mocha}\n\
+ * @api public\n\
+ */\n\
+\n\
+Mocha.prototype.useColors = function(colors){\n\
+  this.options.useColors = arguments.length && colors != undefined\n\
+    ? colors\n\
+    : true;\n\
+  return this;\n\
+};\n\
+\n\
+/**\n\
  * Set the timeout in milliseconds.\n\
  *\n\
  * @param {Number} timeout\n\
@@ -1965,6 +1983,7 @@ Mocha.prototype.run = function(fn){\n\
   if (options.grep) runner.grep(options.grep, options.invert);\n\
   if (options.globals) runner.globals(options.globals);\n\
   if (options.growl) this._growl(runner, reporter);\n\
+  exports.reporters.Base.useColors = options.useColors;\n\
   return runner.run(fn);\n\
 };\n\
 \n\
@@ -2209,24 +2228,29 @@ exports.window = {\n\
 \n\
 exports.cursor = {\n\
   hide: function(){\n\
-    process.stdout.write('\\u001b[?25l');\n\
+    isatty && process.stdout.write('\\u001b[?25l');\n\
   },\n\
 \n\
   show: function(){\n\
-    process.stdout.write('\\u001b[?25h');\n\
+    isatty && process.stdout.write('\\u001b[?25h');\n\
   },\n\
 \n\
   deleteLine: function(){\n\
-    process.stdout.write('\\u001b[2K');\n\
+    isatty && process.stdout.write('\\u001b[2K');\n\
   },\n\
 \n\
   beginningOfLine: function(){\n\
-    process.stdout.write('\\u001b[0G');\n\
+    isatty && process.stdout.write('\\u001b[0G');\n\
   },\n\
 \n\
   CR: function(){\n\
-    exports.cursor.deleteLine();\n\
-    exports.cursor.beginningOfLine();\n\
+    if (isatty) {\n\
+      exports.cursor.deleteLine();\n\
+      exports.cursor.beginningOfLine();\n\
+    } else {\n\
+      process.stdout.write('\\n\
+');\n\
+    }\n\
   }\n\
 };\n\
 \n\
@@ -2276,10 +2300,14 @@ exports.list = function(failures){\n\
 %s') + color('error stack', '\\n\
 %s\\n\
 ');\n\
+      var match = message.match(/^([^:]+): expected/);\n\
+      msg = match ? '\\n\
+      ' + color('error message', match[1]) : '';\n\
+\n\
       if (exports.inlineDiffs) {\n\
-        msg = inlineDiff(err, escape);\n\
+        msg += inlineDiff(err, escape);\n\
       } else {\n\
-        msg = unifiedDiff(err, escape);\n\
+        msg += unifiedDiff(err, escape);\n\
       }\n\
     }\n\
 \n\
@@ -2572,6 +2600,8 @@ function sameType(a, b) {\n\
   return a == b;\n\
 }\n\
 \n\
+\n\
+\n\
 }); // module: reporters/base.js\n\
 \n\
 require.register(\"reporters/doc.js\", function(module, exports, require){\n\
@@ -2782,7 +2812,7 @@ var Date = global.Date\n\
   , clearInterval = global.clearInterval;\n\
 \n\
 /**\n\
- * Expose `Doc`.\n\
+ * Expose `HTML`.\n\
  */\n\
 \n\
 exports = module.exports = HTML;\n\
@@ -2799,7 +2829,7 @@ var statsTemplate = '<ul id=\"mocha-stats\">'\n\
   + '</ul>';\n\
 \n\
 /**\n\
- * Initialize a new `Doc` reporter.\n\
+ * Initialize a new `HTML` reporter.\n\
  *\n\
  * @param {Runner} runner\n\
  * @api public\n\
@@ -2864,7 +2894,7 @@ function HTML(runner, root) {\n\
     if (suite.root) return;\n\
 \n\
     // suite\n\
-    var url = '?grep=' + encodeURIComponent(suite.fullTitle());\n\
+    var url = self.suiteURL(suite);\n\
     var el = fragment('<li class=\"suite\"><h1><a href=\"%s\">%s</a></h1></li>', url, escape(suite.title));\n\
 \n\
     // container\n\
@@ -2895,7 +2925,8 @@ function HTML(runner, root) {\n\
 \n\
     // test\n\
     if ('passed' == test.state) {\n\
-      var el = fragment('<li class=\"test pass %e\"><h2>%e<span class=\"duration\">%ems</span> <a href=\"?grep=%e\" class=\"replay\">‣</a></h2></li>', test.speed, test.title, test.duration, encodeURIComponent(test.fullTitle()));\n\
+      var url = self.testURL(test);\n\
+      var el = fragment('<li class=\"test pass %e\"><h2>%e<span class=\"duration\">%ems</span> <a href=\"%s\" class=\"replay\">‣</a></h2></li>', test.speed, test.title, test.duration, url);\n\
     } else if (test.pending) {\n\
       var el = fragment('<li class=\"test pass pending\"><h2>%e</h2></li>', test.title);\n\
     } else {\n\
@@ -2941,6 +2972,26 @@ function HTML(runner, root) {\n\
     if (stack[0]) stack[0].appendChild(el);\n\
   });\n\
 }\n\
+\n\
+/**\n\
+ * Provide suite URL\n\
+ *\n\
+ * @param {Object} [suite]\n\
+ */\n\
+\n\
+HTML.prototype.suiteURL = function(suite){\n\
+  return '?grep=' + encodeURIComponent(suite.fullTitle());\n\
+};\n\
+\n\
+/**\n\
+ * Provide test URL\n\
+ *\n\
+ * @param {Object} [test]\n\
+ */\n\
+\n\
+HTML.prototype.testURL = function(test){\n\
+  return '?grep=' + encodeURIComponent(test.fullTitle());\n\
+};\n\
 \n\
 /**\n\
  * Display error `msg`.\n\
@@ -5960,11 +6011,7 @@ function parse(html) {\n\
 \n\
   // tag name\n\
   var m = /<([\\w:]+)/.exec(html);\n\
-  if (!m) {\n\
-    var el = document.createElement('div');\n\
-    el.innerHTML = html;\n\
-    return el.lastChild\n\
-  }\n\
+  if (!m) return document.createTextNode(html);\n\
   var tag = m[1];\n\
 \n\
   // body support\n\

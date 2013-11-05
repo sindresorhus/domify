@@ -40,11 +40,7 @@ function parse(html) {
 
   // tag name
   var m = /<([\w:]+)/.exec(html);
-  if (!m) {
-    var el = document.createElement('div');
-    el.innerHTML = html;
-    return el.lastChild
-  }
+  if (!m) return document.createTextNode(html);
   var tag = m[1];
 
   // body support
