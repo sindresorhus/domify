@@ -14,8 +14,12 @@
     </script>
     <script src="domify.js"></script>
     <script>
-      var cloud = require('visionmedia-mocha-cloud');
-      cloud(mocha.run());
+      if (window.mochaPhantomJS) {
+        mochaPhantomJS.run();
+      } else {
+        var cloud = require('visionmedia-mocha-cloud');
+        cloud(mocha.run());
+      }
     </script>
   </body>
 </html>

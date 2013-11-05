@@ -26,11 +26,13 @@ function require(path, parent, orig) {
   // perform real require()
   // by invoking the module's
   // registered function
-  if (!module.exports) {
+  if (!module._resolving && !module.exports) {
     var mod = {};
     mod.exports = {};
     mod.client = mod.component = true;
+    module._resolving = true;
     module.call(this, mod.exports, require.relative(resolved), mod);
+    delete module._resolving;
     module.exports = mod.exports;
   }
 
@@ -6046,6 +6048,9 @@ function parse(html) {\n\
 }\n\
 //@ sourceURL=domify/index.js"
 ));
+
+
+
 
 
 
