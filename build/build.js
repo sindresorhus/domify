@@ -5960,7 +5960,11 @@ function parse(html) {\n\
 \n\
   // tag name\n\
   var m = /<([\\w:]+)/.exec(html);\n\
-  if (!m) throw new Error('No elements were generated.');\n\
+  if (!m) {\n\
+    var el = document.createElement('div');\n\
+    el.innerHTML = html;\n\
+    return el.lastChild\n\
+  }\n\
   var tag = m[1];\n\
 \n\
   // body support\n\
