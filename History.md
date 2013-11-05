@@ -1,15 +1,20 @@
+1.1.0 / 2013-11-05
+==================
 
-1.0.0 / 2013-06-13 
+ * do not rely on live .children NodeList [timoxley]
+ * generate text node if not given an html tag [timoxley]
+
+1.0.0 / 2013-06-13
 ==================
 
  * return document fragments for multiple top level nodes
 
-0.2.0 / 2013-05-21 
+0.2.0 / 2013-05-21
 ==================
 
  * change to return an array at all times. Closes #7
 
-0.1.0 / 2012-10-24 
+0.1.0 / 2012-10-24
 ==================
 
   * add support for body elements with classes [timoxley]
@@ -17,12 +22,12 @@
   * fix tests
   * fix Makefile
 
-0.0.3 / 2012-08-28 
+0.0.3 / 2012-08-28
 ==================
 
   * fix package.json
 
-0.0.2 / 2012-08-01 
+0.0.2 / 2012-08-01
 ==================
 
   * add support for <body> tags. Closes #1 [domenic]
