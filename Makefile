@@ -11,4 +11,4 @@ clean:
 test:
 	@mocha-phantomjs test/index.html
 
-.PHONY: clean test
+.PHONY: build clean test
