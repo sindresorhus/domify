@@ -59,6 +59,9 @@ function parse(html) {
   el.innerHTML = prefix + html + suffix;
   while (depth--) el = el.lastChild;
 
+  // Note: when moving children, don't rely on el.children
+  // being 'live' to support Polymer's broken behaviour.
+  // See: https://github.com/component/domify/pull/23
   if (1 == el.children.length) {
     return el.removeChild(el.children[0]);
   }
