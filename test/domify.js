@@ -94,4 +94,10 @@ describe('domify(html)', function(){
     assert(!el.parentElement);
     assert(!el.parentNode);
   })
+ 
+  it('should support text', function(){
+    var el = domify('text goes here');
+    assert('#text' == el.nodeName);
+  })
 })
+
