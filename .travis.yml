@@ -3,7 +3,7 @@ node_js:
   - '0.10'
 env:
   global:
-    - secure: DTneto8LOBuW78dxD4vH6votzQvZE5iu5kqZiqQze4k/Wn9rx10T2MPeMOA4XfyXCe6YogJoSaJ3g3vJ7r34ZVso5X/589RGjFj1El8k4fHZcdALakMbYpi1uslsOSLZn0ixwEEHrNmmuL0K5sN5kJeaxEJoa2oVIMPUt+zXIoI=
+    - secure: LOKWihSNUASrMYj2ZflhguZP8TrvbcbtXtP2/9dNDkSKBgSvzMM907CgB2p5mr0GHcnGFGd8eYLoGVTjuE7vEkYUMSk9B82OhVKQSpG2N3v5DEaKIZhsgjiv0YwtmnsUrRRa8ZxE9ljAiohDCLRfk7l39WwV5uwSnoGY9SlR2Cc=
   matrix:
     # chrome
     - BROWSER="chrome 31 Mac 10.9"
