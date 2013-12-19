@@ -11,10 +11,16 @@
     ],
     "author": "TJ Holowaychuk <tj@vision-media.ca>",
     "dependencies": {},
+    "devDependencies": {
+        "component-test2": "*"
+    },
     "component": {
         "scripts": {
             "domify": "index.js"
         }
+    },
+    "scripts": {
+        "test": "component-test sauce"
     },
     "main": "index",
     "repository": {
