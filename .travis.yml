@@ -1,0 +1,41 @@
+language: node_js
+node_js:
+  - '0.10'
+env:
+  global:
+    - secure: XrRD279PQOgCvfX39xnTgVkMhNhFSMUlpKrvLQLNuSgoTwlbUi9JQcRKS/2JFnQpGq3M99JNmlN+M+5INm5zHsBS0/PGKwzx55zKO0Kwk5TnqG7BODqVENI11usVK/aavg3TnO88mNsFCOh+8MIICElnyqRVSWRa1wF3bEzOD8A=
+    - DEBUG=component-test:*
+  matrix:
+    # chrome
+    - BROWSER="chrome 31 Mac 10.9"
+    - BROWSER="chrome 30 Windows 2012"
+    - BROWSER="chrome 29 Windows 2012"
+
+    # firefox
+    # - BROWSER="firefox 26 Windows 2012"
+    - BROWSER="firefox 25 Windows 2012"
+    - BROWSER="firefox 24 Windows 2012"
+
+    # safari
+    # - BROWSER="safari 7 Mac 10.9"
+    # - BROWSER="safari 6.1 Mac 10.8"
+    - BROWSER="safari 6 Mac 10.8"
+
+    # internet explorer
+    - BROWSER="internet explorer 11 Windows 2012 R2"
+    - BROWSER="internet explorer 10 Windows 2012"
+    # - BROWSER="internet explorer 9 Windows 2008"
+
+    # iOS
+    # - BROWSER="iphone 7 Mac 10.9"
+    - BROWSER="iphone 6.1 Mac 10.8"
+    - BROWSER="iphone 6.0 Mac 10.8"
+
+    # Android
+    # - BROWSER="android 4.2 Linux"
+    # - BROWSER="android 4.1 Linux"
+    - BROWSER="android 4.0 Linux"
+
+cache:
+  directories:
+    - node_modules
