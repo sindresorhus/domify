@@ -24,7 +24,7 @@ env:
     # internet explorer
     - BROWSER="internet explorer 11 Windows 2012 R2"
     - BROWSER="internet explorer 10 Windows 2012"
-    - BROWSER="internet explorer 9 Windows 2008"
+    # - BROWSER="internet explorer 9 Windows 2008"
 
     # iOS
     # - BROWSER="iphone 7 Mac 10.9"
