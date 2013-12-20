@@ -9,6 +9,6 @@ clean:
 	rm -fr build components
 
 test:
-	@mocha-phantomjs test/index.html
+	@./node_modules/.bin/component-test phantom
 
 .PHONY: build clean test
