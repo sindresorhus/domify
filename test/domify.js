@@ -94,10 +94,19 @@ describe('domify(html)', function(){
     assert(!el.parentElement);
     assert(!el.parentNode);
   })
- 
+
   it('should support text', function(){
     var el = domify('text goes here');
     assert('#text' == el.nodeName);
   })
-})
 
+  describe('svg', function(){
+    it('path', function(){
+      assert(domify('<path></path>') instanceof SVGPathElement);
+    })
+
+    it('rect', function(){
+      assert(domify('<rect></rect>') instanceof SVGRectElement);
+    })
+  })
+})

@@ -10,20 +10,32 @@ module.exports = parse;
  */
 
 var map = {
-  option: [1, '<select multiple="multiple">', '</select>'],
-  optgroup: [1, '<select multiple="multiple">', '</select>'],
   legend: [1, '<fieldset>', '</fieldset>'],
-  thead: [1, '<table>', '</table>'],
-  tbody: [1, '<table>', '</table>'],
-  tfoot: [1, '<table>', '</table>'],
-  colgroup: [1, '<table>', '</table>'],
-  caption: [1, '<table>', '</table>'],
   tr: [2, '<table><tbody>', '</tbody></table>'],
-  td: [3, '<table><tbody><tr>', '</tr></tbody></table>'],
-  th: [3, '<table><tbody><tr>', '</tr></tbody></table>'],
   col: [2, '<table><tbody></tbody><colgroup>', '</colgroup></table>'],
   _default: [0, '', '']
 };
+
+map.td =
+map.th = [3, '<table><tbody><tr>', '</tr></tbody></table>'];
+
+map.option =
+map.optgroup = [1, '<select multiple="multiple">', '</select>'];
+
+map.thead =
+map.tbody =
+map.colgroup =
+map.caption =
+map.tfoot = [1, '<table>', '</table>'];
+
+map.text =
+map.circle =
+map.ellipse =
+map.line =
+map.path =
+map.polygon =
+map.polyline =
+map.rect = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">','</svg>'];
 
 /**
  * Parse `html` and return the children.
@@ -59,16 +71,15 @@ function parse(html) {
   el.innerHTML = prefix + html + suffix;
   while (depth--) el = el.lastChild;
 
-  // Note: when moving children, don't rely on el.children
-  // being 'live' to support Polymer's broken behaviour.
-  // See: https://github.com/component/domify/pull/23
-  if (1 == el.children.length) {
-    return el.removeChild(el.children[0]);
+  // one element
+  if (el.firstChild == el.lastChild) {
+    return el.removeChild(el.firstChild);
   }
 
+  // several elements
   var fragment = document.createDocumentFragment();
-  while (el.children.length) {
-    fragment.appendChild(el.removeChild(el.children[0]));
+  while (el.firstChild) {
+    fragment.appendChild(el.removeChild(el.firstChild));
   }
 
   return fragment;

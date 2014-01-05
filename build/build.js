@@ -5983,20 +5983,32 @@ module.exports = parse;\n\
  */\n\
 \n\
 var map = {\n\
-  option: [1, '<select multiple=\"multiple\">', '</select>'],\n\
-  optgroup: [1, '<select multiple=\"multiple\">', '</select>'],\n\
   legend: [1, '<fieldset>', '</fieldset>'],\n\
-  thead: [1, '<table>', '</table>'],\n\
-  tbody: [1, '<table>', '</table>'],\n\
-  tfoot: [1, '<table>', '</table>'],\n\
-  colgroup: [1, '<table>', '</table>'],\n\
-  caption: [1, '<table>', '</table>'],\n\
   tr: [2, '<table><tbody>', '</tbody></table>'],\n\
-  td: [3, '<table><tbody><tr>', '</tr></tbody></table>'],\n\
-  th: [3, '<table><tbody><tr>', '</tr></tbody></table>'],\n\
   col: [2, '<table><tbody></tbody><colgroup>', '</colgroup></table>'],\n\
   _default: [0, '', '']\n\
 };\n\
+\n\
+map.td =\n\
+map.th = [3, '<table><tbody><tr>', '</tr></tbody></table>'];\n\
+\n\
+map.option =\n\
+map.optgroup = [1, '<select multiple=\"multiple\">', '</select>'];\n\
+\n\
+map.thead =\n\
+map.tbody =\n\
+map.colgroup =\n\
+map.caption =\n\
+map.tfoot = [1, '<table>', '</table>'];\n\
+\n\
+map.text =\n\
+map.circle =\n\
+map.ellipse =\n\
+map.line =\n\
+map.path =\n\
+map.polygon =\n\
+map.polyline =\n\
+map.rect = [1, '<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">','</svg>'];\n\
 \n\
 /**\n\
  * Parse `html` and return the children.\n\
@@ -6032,16 +6044,15 @@ function parse(html) {\n\
   el.innerHTML = prefix + html + suffix;\n\
   while (depth--) el = el.lastChild;\n\
 \n\
-  // Note: when moving children, don't rely on el.children\n\
-  // being 'live' to support Polymer's broken behaviour.\n\
-  // See: https://github.com/component/domify/pull/23\n\
-  if (1 == el.children.length) {\n\
-    return el.removeChild(el.children[0]);\n\
+  // one element\n\
+  if (el.firstChild == el.lastChild) {\n\
+    return el.removeChild(el.firstChild);\n\
   }\n\
 \n\
+  // several elements\n\
   var fragment = document.createDocumentFragment();\n\
-  while (el.children.length) {\n\
-    fragment.appendChild(el.removeChild(el.children[0]));\n\
+  while (el.firstChild) {\n\
+    fragment.appendChild(el.removeChild(el.firstChild));\n\
   }\n\
 \n\
   return fragment;\n\
