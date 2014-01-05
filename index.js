@@ -26,6 +26,19 @@ var map = {
 };
 
 /**
+ * svg elements.
+ */
+
+map.text =
+map.circle =
+map.ellipse =
+map.line =
+map.path =
+map.polygon =
+map.polyline =
+map.rect = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">','</svg>'];
+
+/**
  * Parse `html` and return the children.
  *
  * @param {String} html
@@ -59,16 +72,15 @@ function parse(html) {
   el.innerHTML = prefix + html + suffix;
   while (depth--) el = el.lastChild;
 
-  // Note: when moving children, don't rely on el.children
-  // being 'live' to support Polymer's broken behaviour.
-  // See: https://github.com/component/domify/pull/23
-  if (1 == el.children.length) {
-    return el.removeChild(el.children[0]);
+  // one element
+  if (el.firstChild == el.lastChild) {
+    return el.removeChild(el.firstChild);
   }
 
+  // several elements
   var fragment = document.createDocumentFragment();
-  while (el.children.length) {
-    fragment.appendChild(el.removeChild(el.children[0]));
+  while (el.firstChild) {
+    fragment.appendChild(el.removeChild(el.firstChild));
   }
 
   return fragment;
