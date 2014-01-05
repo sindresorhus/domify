@@ -10,24 +10,23 @@ module.exports = parse;
  */
 
 var map = {
-  option: [1, '<select multiple="multiple">', '</select>'],
-  optgroup: [1, '<select multiple="multiple">', '</select>'],
   legend: [1, '<fieldset>', '</fieldset>'],
-  thead: [1, '<table>', '</table>'],
-  tbody: [1, '<table>', '</table>'],
-  tfoot: [1, '<table>', '</table>'],
-  colgroup: [1, '<table>', '</table>'],
-  caption: [1, '<table>', '</table>'],
   tr: [2, '<table><tbody>', '</tbody></table>'],
-  td: [3, '<table><tbody><tr>', '</tr></tbody></table>'],
-  th: [3, '<table><tbody><tr>', '</tr></tbody></table>'],
   col: [2, '<table><tbody></tbody><colgroup>', '</colgroup></table>'],
   _default: [0, '', '']
 };
 
-/**
- * svg elements.
- */
+map.td =
+map.th = [3, '<table><tbody><tr>', '</tr></tbody></table>'];
+
+map.option =
+map.optgroup = [1, '<select multiple="multiple">', '</select>'];
+
+map.thead =
+map.tbody =
+map.colgroup =
+map.caption =
+map.tfoot = [1, '<table>', '</table>'];
 
 map.text =
 map.circle =

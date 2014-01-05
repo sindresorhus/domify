@@ -5983,24 +5983,23 @@ module.exports = parse;\n\
  */\n\
 \n\
 var map = {\n\
-  option: [1, '<select multiple=\"multiple\">', '</select>'],\n\
-  optgroup: [1, '<select multiple=\"multiple\">', '</select>'],\n\
   legend: [1, '<fieldset>', '</fieldset>'],\n\
-  thead: [1, '<table>', '</table>'],\n\
-  tbody: [1, '<table>', '</table>'],\n\
-  tfoot: [1, '<table>', '</table>'],\n\
-  colgroup: [1, '<table>', '</table>'],\n\
-  caption: [1, '<table>', '</table>'],\n\
   tr: [2, '<table><tbody>', '</tbody></table>'],\n\
-  td: [3, '<table><tbody><tr>', '</tr></tbody></table>'],\n\
-  th: [3, '<table><tbody><tr>', '</tr></tbody></table>'],\n\
   col: [2, '<table><tbody></tbody><colgroup>', '</colgroup></table>'],\n\
   _default: [0, '', '']\n\
 };\n\
 \n\
-/**\n\
- * svg elements.\n\
- */\n\
+map.td =\n\
+map.th = [3, '<table><tbody><tr>', '</tr></tbody></table>'];\n\
+\n\
+map.option =\n\
+map.optgroup = [1, '<select multiple=\"multiple\">', '</select>'];\n\
+\n\
+map.thead =\n\
+map.tbody =\n\
+map.colgroup =\n\
+map.caption =\n\
+map.tfoot = [1, '<table>', '</table>'];\n\
 \n\
 map.text =\n\
 map.circle =\n\
