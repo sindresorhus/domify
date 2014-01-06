@@ -1,5 +1,6 @@
 
-var assert = require('assert');
+// we need to fix this in component
+var assert = require('component-assert');
 var domify = require('domify');
 
 describe('domify(html)', function(){

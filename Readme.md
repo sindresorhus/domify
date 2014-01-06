@@ -10,8 +10,9 @@ domify('<p>Hello <em>there</em></p>')
 ## Running tests
 
 ```
+$ npm i -g component-test2
 $ make
-$ open test/index.html
+$ component test browser
 ```
 
 ## License
