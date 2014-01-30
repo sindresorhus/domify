@@ -101,6 +101,12 @@ describe('domify(html)', function(){
     assert('#text' == el.nodeName);
   })
 
+  it('should preserve trailing/leading spaces for textElement', function(){
+    var el = domify('  text goes here  ');
+    assert('#text' == el.nodeName);
+    assert('  text goes here  ' == el.textContent);
+  })  
+
   describe('svg', function(){
     it('path', function(){
       assert(domify('<path></path>') instanceof SVGPathElement);
