@@ -1,3 +1,9 @@
+
+1.2.1 / 2014-01-30
+==================
+
+ * fix leading/trailing whitespace in text nodes
+
 1.2.0 / 2014-01-05
 ==================
 
