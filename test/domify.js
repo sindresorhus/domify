@@ -1,6 +1,5 @@
 
-// we need to fix this in component
-var assert = require('component-assert');
+var assert = require('assert');
 var domify = require('domify');
 
 describe('domify(html)', function(){
@@ -105,7 +104,7 @@ describe('domify(html)', function(){
     var el = domify('  text goes here  ');
     assert('#text' == el.nodeName);
     assert('  text goes here  ' == el.textContent);
-  })  
+  })
 
   describe('svg', function(){
     it('path', function(){
