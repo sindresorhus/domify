@@ -1,5 +1,5 @@
 {
-  "name": "domify",
+  "name": "component-domify",
   "version": "1.2.1",
   "description": "turn HTML into DOM elements",
   "keywords": [
