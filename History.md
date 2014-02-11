@@ -1,4 +1,12 @@
 
+1.2.2 / 2014-02-10
+==================
+
+  * package: rename to "component-domify"
+  * package: update "main" and "component" fields
+  * package: use 2 space tabs
+  * component: remove redundant "scripts" array entry
+
 1.2.1 / 2014-01-30
 ==================
 
