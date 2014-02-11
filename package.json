@@ -13,10 +13,10 @@
   "dependencies": {},
   "component": {
     "scripts": {
-      "domify": "index.js"
+      "domify/index.js": "index.js"
     }
   },
-  "main": "index",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/component/domify.git"
