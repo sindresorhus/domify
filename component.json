@@ -1,6 +1,6 @@
 {
   "name": "domify",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "turn HTML into DOM elements",
   "development": {
     "component/assert": "*"

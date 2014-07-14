@@ -1,4 +1,11 @@
 
+1.3.0 / 2014-07-14
+==================
+
+ * index: allow an explicit `document` object to be passed in
+ * index: update JSDoc comments
+ * package: rename back to "domify"
+
 1.2.2 / 2014-02-10
 ==================
 
