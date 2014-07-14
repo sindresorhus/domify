@@ -38,10 +38,12 @@ map.polyline =
 map.rect = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">','</svg>'];
 
 /**
- * Parse `html` and return the children.
+ * Parse `html` and return a DOM Node instance, which could be a TextNode,
+ * HTML DOM Node of some kind (<div> for example), or a DocumentFragment
+ * instance, depending on the contents of the `html` string.
  *
- * @param {String} html
- * @return {Array}
+ * @param {String} html - HTML string to "domify"
+ * @return {DOMNode}
  * @api private
  */
 
