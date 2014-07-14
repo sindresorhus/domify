@@ -43,16 +43,20 @@ map.rect = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">','</svg>'
  * instance, depending on the contents of the `html` string.
  *
  * @param {String} html - HTML string to "domify"
- * @return {DOMNode}
+ * @param {Document} doc - The `document` instance to create the Node for
+ * @return {DOMNode} the TextNode, DOM Node, or DocumentFragment instance
  * @api private
  */
 
-function parse(html) {
+function parse(html, doc) {
   if ('string' != typeof html) throw new TypeError('String expected');
-  
+
+  // default to the global `document` object
+  if (!doc) doc = document;
+
   // tag name
   var m = /<([\w:]+)/.exec(html);
-  if (!m) return document.createTextNode(html);
+  if (!m) return doc.createTextNode(html);
 
   html = html.replace(/^\s+|\s+$/g, ''); // Remove leading/trailing whitespace
 
@@ -60,7 +64,7 @@ function parse(html) {
 
   // body support
   if (tag == 'body') {
-    var el = document.createElement('html');
+    var el = doc.createElement('html');
     el.innerHTML = html;
     return el.removeChild(el.lastChild);
   }
@@ -70,7 +74,7 @@ function parse(html) {
   var depth = wrap[0];
   var prefix = wrap[1];
   var suffix = wrap[2];
-  var el = document.createElement('div');
+  var el = doc.createElement('div');
   el.innerHTML = prefix + html + suffix;
   while (depth--) el = el.lastChild;
 
@@ -80,7 +84,7 @@ function parse(html) {
   }
 
   // several elements
-  var fragment = document.createDocumentFragment();
+  var fragment = doc.createDocumentFragment();
   while (el.firstChild) {
     fragment.appendChild(el.removeChild(el.firstChild));
   }
