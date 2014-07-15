@@ -79,6 +79,11 @@ describe('domify(html)', function(){
     assert('TR' == el.nodeName);
   })
 
+  it('should support script tags', function(){
+    var el = domify('<script src="example.js"></script>');
+    assert('SCRIPT' == el.nodeName);
+  })
+
   it('should support option tags', function(){
     var el = domify('<option></option>');
     assert('OPTION' == el.nodeName);
