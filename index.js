@@ -42,14 +42,15 @@ map.colgroup =
 map.caption =
 map.tfoot = [1, '<table>', '</table>'];
 
-map.text =
-map.circle =
+map.polyline =
 map.ellipse =
+map.polygon =
+map.circle =
+map.text =
 map.line =
 map.path =
-map.polygon =
-map.polyline =
-map.rect = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">','</svg>'];
+map.rect =
+map.g = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">','</svg>'];
 
 /**
  * Parse `html` and return a DOM Node instance, which could be a TextNode,

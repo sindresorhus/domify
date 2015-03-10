@@ -119,5 +119,9 @@ describe('domify(html)', function(){
     it('rect', function(){
       assert(domify('<rect></rect>') instanceof SVGRectElement);
     })
+
+    it('g', function() {
+      assert(domify('<g></g>') instanceof SVGGElement);
+    })
   })
 })
