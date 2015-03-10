@@ -2,7 +2,7 @@
 1.3.2 / 2015-03-10
 ==================
 
-  * add support for <g> svg elements
+  * add support for `<g>` svg elements
 
 1.3.1 / 2014-07-16
 ==================
