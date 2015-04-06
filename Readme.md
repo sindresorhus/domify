@@ -1,11 +1,16 @@
-
 # domify
 
-  Turn HTML into DOM elements x-browser.
+Turn HTML into DOM elements x-browser.
+
+## Usage
 
 ```js
 var domify = require('domify')
-domify('<p>Hello <em>there</em></p>')
+
+document.addEventListener('DOMContentLoaded', function() {
+  var el = domify('<p>Hello <em>there</em></p>')
+  document.body.appendChild(el)
+})
 ```
 
 ## Running tests
@@ -18,4 +23,4 @@ $ component-test browser
 
 ## License
 
-  MIT
+MIT
