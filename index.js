@@ -17,7 +17,7 @@ if (typeof document !== 'undefined') {
   bugTestDiv.innerHTML = '  <link/><table></table><a href="/a">a</a><input type="checkbox"/>';
   // Make sure that link elements get serialized correctly by innerHTML
   // This requires a wrapper element in IE
-  var innerHTMLBug = !bugTestDiv.getElementsByTagName('link').length;
+  innerHTMLBug = !bugTestDiv.getElementsByTagName('link').length;
   bugTestDiv = undefined;
 }
 
