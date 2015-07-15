@@ -1,4 +1,10 @@
 
+1.4.0 / 2015-07-15
+==================
+
+  * package: Add "license" attribute (#41, @pdehaan)
+  * index: Allow other implementations of `document` (#39, @tomekwi)
+
 1.3.3 / 2015-04-05
 ==================
 
