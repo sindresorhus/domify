@@ -84,7 +84,12 @@ function parse(html, doc) {
   // body support
   if (tag == 'body') {
     var el = doc.createElement('html');
-    el.innerHTML = html;
+
+    // ie9 fix: if we just paste `html` in `el`, IE throws script600
+    var bodyEl = doc.createElement('body');
+    bodyEl.innerHTML = html;
+
+    el.appendChild(bodyEl);
     return el.removeChild(el.lastChild);
   }
 
