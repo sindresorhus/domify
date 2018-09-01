@@ -1,11 +1,5 @@
 
 /**
- * Expose `parse`.
- */
-
-module.exports = parse;
-
-/**
  * Tests for browser support.
  */
 
@@ -110,3 +104,5 @@ function parse(html, doc) {
 
   return fragment;
 }
+
+export {parse};
