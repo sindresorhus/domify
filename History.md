@@ -1,4 +1,11 @@
 
+1.4.1 / 2021-04-27
+==================
+
+  * Fix XSS via prototype pollution (#48)
+  * Setup CI (#49)
+  * add MIT license file
+
 1.4.0 / 2015-07-15
 ==================
 
