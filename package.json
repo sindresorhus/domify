@@ -11,6 +11,9 @@
   ],
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
   "dependencies": {},
+  "scripts": {
+    "test": "mocha -r jsdom-global/register"
+  },
   "component": {
     "scripts": {
       "domify/index.js": "index.js"
@@ -24,5 +27,10 @@
   },
   "files": [
     "index.js"
-  ]
+  ],
+  "devDependencies": {
+    "jsdom": "^16.5.3",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^8.3.2"
+  }
 }
