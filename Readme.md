@@ -26,9 +26,7 @@ domify('<p>Hello <em>there</em></p>', jsdom.defaultView.document);
 ## Running tests
 
 ```
-$ npm i -g component-test
-$ make
-$ component-test browser
+$ npm test
 ```
 
 ## License

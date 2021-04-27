@@ -1,6 +1,6 @@
 
 var assert = require('assert');
-var domify = require('domify');
+var domify = require('..');
 
 describe('domify(html)', function(){
   it('should convert HTML to DOM elements', function(){
@@ -111,17 +111,20 @@ describe('domify(html)', function(){
     assert('  text goes here  ' == el.textContent);
   })
 
-  describe('svg', function(){
-    it('path', function(){
-      assert(domify('<path></path>') instanceof SVGPathElement);
-    })
+  // Only run SVG tests in environments that support them.
+  if (typeof SVGElement !== 'undefined'){
+    describe('svg', function(){
+      it('path', function(){
+        assert(domify('<path></path>') instanceof SVGPathElement);
+      })
 
-    it('rect', function(){
-      assert(domify('<rect></rect>') instanceof SVGRectElement);
-    })
+      it('rect', function(){
+        assert(domify('<rect></rect>') instanceof SVGRectElement);
+      })
 
-    it('g', function() {
-      assert(domify('<g></g>') instanceof SVGGElement);
+      it('g', function() {
+        assert(domify('<g></g>') instanceof SVGGElement);
+      })
     })
-  })
+  }
 })
