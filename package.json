@@ -1,6 +1,6 @@
 {
 	"name": "domify",
-	"version": "1.4.2",
+	"version": "2.0.0",
 	"description": "Turn a HTML string into DOM elements, cross-platform",
 	"license": "MIT",
 	"repository": "sindresorhus/domify",
