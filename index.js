@@ -27,17 +27,6 @@ wrapMap.polyline
 = wrapMap.rect
 = wrapMap.g = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">', '</svg>'];
 
-/**
- * Parse `html` and return a DOM Node instance, which could be a TextNode,
- * HTML DOM Node of some kind (<div> for example), or a DocumentFragment
- * instance, depending on the contents of the `html` string.
- *
- * @param {String} htmlString - HTML string to "domify"
- * @param {Document} doc - The `document` instance to create the Node for
- * @return {DOMNode} the TextNode, DOM Node, or DocumentFragment instance
- * @api private
- */
-
 function domify(htmlString, document = globalThis.document) {
 	if (typeof htmlString !== 'string') {
 		throw new TypeError('String expected');
