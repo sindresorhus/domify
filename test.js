@@ -113,6 +113,18 @@ test('preserves trailing/leading spaces for textElement', t => {
 	t.is(element.textContent, '  text goes here  ');
 });
 
+test('handles comments', t => {
+	const comment = domify('<!-- mycomment -->');
+	t.is(comment.nodeType, jsdom.window.Node.COMMENT_NODE);
+	t.is(comment.data, ' mycomment ');
+});
+
+test('handles comments with leading/trailing spaces', t => {
+	const comment = domify('<!--   mycomment   -->');
+	t.is(comment.nodeType, jsdom.window.Node.COMMENT_NODE);
+	t.is(comment.data, '   mycomment   ');
+});
+
 if (globalThis.SVGElement) {
 	test('svg - supports path tag', t => {
 		t.true(domify('<path></path>') instanceof globalThis.SVGPathElement);

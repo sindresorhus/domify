@@ -43,6 +43,12 @@ function domify(htmlString, document = globalThis.document) {
 		throw new TypeError('String expected');
 	}
 
+	// Handle comment nodes
+	const commentMatch = /^<!--(.*?)-->$/s.exec(htmlString);
+	if (commentMatch) {
+		return document.createComment(commentMatch[1]);
+	}
+
 	const tagName = /<([\w:]+)/.exec(htmlString)?.[1];
 
 	if (!tagName) {
