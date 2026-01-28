@@ -7,7 +7,7 @@
 Works out of the box in the browser:
 
 ```js
-import domify from 'domify';
+import { domify } from 'domify';
 
 document.addEventListener('DOMContentLoaded', () => {
 	const element = domify('<p>Hello <em>there</em></p>');

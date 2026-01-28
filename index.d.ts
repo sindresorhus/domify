@@ -6,4 +6,4 @@ Turn a HTML string into DOM elements, cross-platform.
 */
 declare function domify(htmlString: string, document?: Document): Node;
 
-export = domify;
+export {domify};

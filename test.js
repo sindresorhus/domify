@@ -1,6 +1,6 @@
 import test from 'ava';
 import {JSDOM} from 'jsdom';
-import baseDomify from 'domify';
+import {domify as baseDomify} from 'domify';
 
 const jsdom = new JSDOM();
 const domify = html => baseDomify(html, jsdom.window.document);

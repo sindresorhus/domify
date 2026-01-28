@@ -1,6 +1,6 @@
 const test = require('ava');
 const {JSDOM} = require('jsdom');
-const baseDomify = require('domify');
+const {domify: baseDomify} = require('domify');
 
 const jsdom = new JSDOM();
 const domify = html => baseDomify(html, jsdom.window.document);
