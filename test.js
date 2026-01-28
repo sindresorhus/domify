@@ -1,6 +1,6 @@
-const test = require('ava');
-const {JSDOM} = require('jsdom');
-const baseDomify = require('./index.js');
+import test from 'ava';
+import {JSDOM} from 'jsdom';
+import baseDomify from 'domify';
 
 const jsdom = new JSDOM();
 const domify = html => baseDomify(html, jsdom.window.document);
