@@ -9,11 +9,14 @@
 		"types": "./index.d.ts",
 		"default": "./index.js"
 	},
-	"main": "./index.js",
-	"types": "./index.d.ts",
+	"type": "module",
+	"exports": {
+		"types": "./index.d.ts",
+		"default": "./index.js"
+	},
 	"sideEffects": false,
 	"engines": {
-		"node": ">=18"
+		"node": ">=20"
 	},
 	"scripts": {
 		"test": "xo && ava"
@@ -34,14 +37,8 @@
 		"document"
 	],
 	"devDependencies": {
-		"ava": "^5.3.1",
-		"xo": "^0.56.0",
-		"jsdom": "^22.1.0"
-	},
-	"xo": {
-		"rules": {
-			"no-multi-assign": "off",
-			"unicorn/prefer-module": "off"
-		}
+		"ava": "^6.4.1",
+		"xo": "^1.2.3",
+		"jsdom": "^28.1.0"
 	}
 }

@@ -1,3 +1,5 @@
+/* eslint-disable no-multi-assign */
+
 const wrapMap = {
 	legend: [1, '<fieldset>', '</fieldset>'],
 	tr: [2, '<table><tbody>', '</tbody></table>'],
@@ -27,7 +29,7 @@ wrapMap.polyline
 = wrapMap.rect
 = wrapMap.g = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">', '</svg>'];
 
-function domify(htmlString, document = globalThis.document) {
+export default function domify(htmlString, document = globalThis.document) {
 	if (typeof htmlString !== 'string') {
 		throw new TypeError('String expected');
 	}
@@ -76,5 +78,3 @@ function domify(htmlString, document = globalThis.document) {
 
 	return fragment;
 }
-
-module.exports = domify;
