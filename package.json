@@ -1,6 +1,6 @@
 {
 	"name": "domify",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"description": "Turn a HTML string into DOM elements, cross-platform",
 	"license": "MIT",
 	"repository": "sindresorhus/domify",
@@ -10,10 +10,6 @@
 		"default": "./index.js"
 	},
 	"type": "module",
-	"exports": {
-		"types": "./index.d.ts",
-		"default": "./index.js"
-	},
 	"sideEffects": false,
 	"engines": {
 		"node": ">=20"
